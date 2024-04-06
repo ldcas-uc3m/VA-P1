@@ -6,7 +6,7 @@ Universidad Carlos III de Madrid
 
 
 ## Installation and execution
-This requires Python 3.12+.
+This requires Python 3.10.
 
 1. Create a Python virtual enviroment in the `.venv` folder.
     ```bash
@@ -25,5 +25,11 @@ This requires Python 3.12+.
    ```
    pip install -r requirements.txt
    ```
+4. If you have an Nvidia GPU and don't want the training to take ages, install [CUDA Toolkit](https://developer.nvidia.com/cuda-toolkit) on your machine.  
+   You'll also have to setup CUDA support for pytorch on your system. Check the [instructions on PyTorch's website](https://pytorch.org/get-started/locally/).
+5. Download the data to the `data` folder:
+   - [`db1.zip`](https://drive.google.com/file/d/1en19SOHlipCUgWRkJIGgiYcRl-zpCeDp/view?usp=sharing)
+   - [`db2.zip`](https://drive.google.com/file/d/1a3a3lNpEFGTxMSCRN0uMMwH6_XBAPAXg/view?usp=drive_link)
 
-<!-- TODO -->
+
+### Running on VsCode
