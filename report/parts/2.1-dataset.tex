@@ -1,0 +1,18 @@
+\subsection{Generación del \textit{dataset} de entrenamiento}
+
+Para la práctica se cuenta con un conjunto de datos basados en imágenes de lunares a fin de que la red diseñada sea capaz de otorgar una puntución para cada categoría posible de lunar.\medskip
+
+A fin de poder mejorar el entrenamiento de la red, se han llevado a cabo una serie de transformaciones sobre el conjunto de imágnes originales para así proveer al conjunto de entrenamiento de diferentes causuisticas que pueden tener lugar:
+\begin{itemize}
+    \item \textit{Horizontal Flip}: Esta transfromación con una probabilidad del 50\% volteará la imagen seleccioanda sobre el eje horizontal, haciendo que quede a modo de espejo de la original.
+    \item \textit{Rotation}: Esta transformación rotará la imagen original con un valor aleatorio dentro del rango provisto tanto en positivo como en negativo, por ejemplo si recibe como paramtero 20, rotara la imagen con un valor aleatorio entre -20 y 20 grados.
+    \item \textit{Color Jitter}: El objetivo de esta transformación es poder modificar los parametros cromáticos de una imagen dada, para se modificarán los parámetros de brillo, contraste, saturación y matriz.
+    En la implementación actual, tras experimentar con diferentes valores para cada parametro los mejores valores se obtuvieron teniendo un 0.28 para el brillo, un 0.3 para contraste y saturación, y un 0.06 para matriz,
+    que aunque pueda resultar bajo, permite mantener los colores en terminos generales entre tonos marrones o amarillos/rojos oscuros, ya que a valores más elevados comiezan a aparecer colores que no serían naturales para este tipo de lesiones como tonos verdes o azules.
+    \item \textit{Gaussian Blur}: Con esta transformación se busca aplicar una difuminación sobre la imagen original, a fin de reducuir el ruido de la imágen y suavizar los detalles. Esta función toma como entrada el tamaño del\textit{kernel}, que debe ser un número impar mayor o igual a tres.\\
+    En la implementación actual, tras llevar a cabo multiples pruebas, se determinó que dicho\textit{kernel} fuese un número impar comprendido entre el 3 y 50.
+\end{itemize}
+
+Tras analizar cada trasformación por separado, y obtener los valores correctos para los parámetros, se implementó una trasformación compuesta que aplicase sobre cada imagen todas las transformaciones mencionadas previamente, además de las transformaciones ya predefinidas, \texttt{CropByMask}, \texttt{Rescale} y \texttt{RandomCrop}, ambas a 224px, ya que es el tamaño de entrada de la CNN.\medskip
+
+Finalmente se decidió no incluir la transfomación de rotación de imágnes, ya que en las pruebas llevadas acabo a pesar de realizar el recorte antes de la rotación, en gran cantidad de imágenes quedan bordes de color negro en las esquinas, ya que al rotar la imagen, parte de su información quedaba fuera del campo visible dejando las mencionadas esquinas negras, que provocaban peores resultados en el modelo.

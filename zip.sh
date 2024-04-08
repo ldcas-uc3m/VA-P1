@@ -12,16 +12,11 @@ latexmk -cd -shell-escape -pdf report/report.tex
 
 cp report/report.pdf .
 
-
-cd src
-
-# <clean stuff up>
-
-cd ..
+cp results/output_text.csv ..
 
 # zip it (excluding useless stuff)
 echo "Zipping..."
-zip -r $OUTFILE . -x zip.sh report/\* \*.git\* img/\* README.md
+zip -r $OUTFILE . -x zip.sh report/\* \*.git\* img/\* data/\* .venv/\* README.md LICENSE requirements.txt 
 
 # cleanup
 echo "Cleaning up..."
