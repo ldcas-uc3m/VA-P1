@@ -1,3 +1,7 @@
 \subsection{Diseño de la red neuronal convolucional}
+Para resolver este problema se diseñó una arquitectura de CNN básica, usando filtros convolucionales con ReLUs de $3\times 3$ (dado que es un buen equilibrio entre tamaño de filtro y número de operaciones, para generar el mismo \textit{receptive field}) usando \textit{same padding}, y aumentando el número de canales progresivamente hasta 128.\\
+Entre capas convolucionales, se aplica \textit{batch normalization} para mejorar y estabilizar el entrenamiento, y \textit{max pooling} con filtros de $2\times 2$ y \textit{stride} 2 para reducir la resolución a la vez que aumentamos los canales.\smallskip
+
+A la salida de la última capa convolucional, se realiza un \textit{flatten} para la entrada del clasificador (\textit{fully connected network}). Se aplica un \textit{dropout} bastante agresivo en esta capa, que debido a nuestras pruebas proporcionó un mejor resultado, y luego usamos simples capas lineares hasta reducir al output de tamaño 3.
 
 \drawiosvgfigure[1]{cnn_architecture}{Arquitectura de la CNN propuesta}
